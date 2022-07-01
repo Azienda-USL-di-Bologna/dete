@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <RollingFile name="Dete_Application" fileName="${sys:catalina.home}/logs/dete_application.log"
+            filePattern="${sys:catalina.home}/logs/dete_application_%d{MM-dd-yyyy}.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy MM dd HH:mm:ss,SSS} %p %t %c - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="3">
+                <Delete basePath="${sys:catalina.home}/logs" maxDepth="2">
+                    <IfFileName glob="dete_application_*.log.gz" />
+                    <IfLastModified age="10d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <RollingFile name="Dete_LocalChef" fileName="${sys:catalina.home}/logs/dete_localchef.log"
+            filePattern="${sys:catalina.home}/logs/dete_localchef_%d{MM-dd-yyyy}.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy MM dd HH:mm:ss,SSS} %p %t %c - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- <SizeBasedTriggeringPolicy size="50 MB"/> -->
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="3">
+                <Delete basePath="${sys:catalina.home}/logs" maxDepth="2">
+                    <IfFileName glob="dete_localchef_*.log.gz" />
+                    <IfLastModified age="10d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <RollingFile name="Dete_Service" fileName="${sys:catalina.home}/logs/dete_service.log"
+            filePattern="${sys:catalina.home}/logs/dete_service_%d{MM-dd-yyyy}.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy MM dd HH:mm:ss,SSS} %p %t %c - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="3">
+                <Delete basePath="${sys:catalina.home}/logs" maxDepth="2">
+                    <IfFileName glob="dete_service_*.log.gz" />
+                    <IfLastModified age="10d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+           <PatternLayout>
+                <Pattern>%d{yyyy MM dd HH:mm:ss,SSS} %p %t %c - %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="dete_application" level="info" additivity="false">
+            <AppenderRef ref="Dete_Application"/>
+        </Logger>
+        <Logger name="dete_localchef" level="info" additivity="false">
+            <AppenderRef ref="Dete_LocalChef"/>
+        </Logger>
+        <Logger name="dete_service" level="info" additivity="false">
+            <AppenderRef ref="Dete_Service"/>
+        </Logger>
+
+        <Root level="info">
+            <!--<AppenderRef ref="Console" />-->
+            <AppenderRef ref="Dete_Application" />
+        </Root>
+    </Loggers>
+</Configuration>
